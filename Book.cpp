@@ -9,7 +9,9 @@
 #include <iomanip>
 #include <string>
 #include "HashTable.h"
-#include "List.h"3
+#include "List.h"
+
+using namespace std;
 
 Book::Book():title(""), author(""), price(0.0), isbn(0){};
 
@@ -63,7 +65,7 @@ ostream& operator<<(ostream& os, const Book& book)
 {
 	os << book.title << " by " << book.author << endl;
 	os << "$" << book.price << endl;
-	os << "ISBN#:" << book.isbn << endl;
+	os << "ISBN#:" << book.isbn << endl << endl;
 	return os;
 }
 //prints out a book to the designated stream in the following format

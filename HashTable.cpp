@@ -29,11 +29,23 @@ int HashTable::hash(string key) const
 
 int HashTable::countBucket(int index) const
 {
-	return 0;
+	assert(0 <= index && index < SIZE);
+	return Table[index].getSize();
 }
-//counts the number of Books at this index
-//returns the count
-//pre: 0<= index < SIZE
+
+int HashTable::search(Book b) const
+{
+	string key = b.get_title() + b.get_author();
+	int index = hash(key);
+	if (Table[index].linearSearch(b) == -1)
+	{
+		return -1;
+	}
+	else
+	{
+		return index;
+	}
+}
 
 void HashTable::insert(Book b)
 {
@@ -49,14 +61,37 @@ void HashTable::remove(Book b)
 	int index = hash(key);
 	if(!Table[index].isEmpty())
 	{
-	Table[index].pointIterator();
-    int position = Table[index].linearSearch(b);
-	Table[index].advanceToIndex(position);
-	Talbe[index].
+		Table[index].pointIterator();
+		int position = Table[index].linearSearch(b);
+		Table[index].advanceToIndex(position);
+		Table[index].removeIterator();
 	}
-;
+	else
+	{
+		cout << "The book is not on the list."<< endl;
+	}
+
 }
-//removes b from the table
-//calls the hash function on the key to determine
-//the correct bucket
-//pre: b is in the table
+
+void HashTable::printBucket(ostream& out, int index) const
+{
+	assert(0 <= index && index < SIZE);
+	Table[index].print();
+}
+
+void HashTable::printTable(ostream& out) const
+{
+	for(int index = 0; index <=9; index++)
+	{
+		if(Table[index].isEmpty())
+		{
+			continue;
+		}
+		else
+		{
+			out << "Group " << index+1 << endl;
+			out << Table[index].getStart();
+			out << "+" << countBucket(index) -1 << " more similar book(s)" << endl << endl << endl;
+		}
+	}
+}
