@@ -37,7 +37,9 @@ int HashTable::search(Book b) const
 {
 	string key = b.get_title() + b.get_author();
 	int index = hash(key);
-	if (Table[index].linearSearch(b) == -1)
+	if(Table[index].isEmpty())
+		return -1;
+	else if (Table[index].linearSearch(b) == -1)
 	{
 		return -1;
 	}
@@ -70,7 +72,16 @@ void HashTable::remove(Book b)
 	{
 		cout << "The book is not on the list."<< endl;
 	}
-
+	/*assert(search(b) != -1);
+		int index = search(b);
+		int Index_In_Bucket = Table[index].linearSearch(b);
+		Table[index].pointIterator();
+		for (int i = 1; i < Index_In_Bucket; i++)
+		{
+			Table[index].advanceIterator();
+		}
+		Table[index].removeIterator();
+		*/
 }
 
 void HashTable::printBucket(ostream& out, int index) const
@@ -81,7 +92,8 @@ void HashTable::printBucket(ostream& out, int index) const
 
 void HashTable::printTable(ostream& out) const
 {
-	for(int index = 0; index <=9; index++)
+	cout << "Books in the Catalogue:" << endl;
+	for(int index = 0; index < SIZE; index++)
 	{
 		if(Table[index].isEmpty())
 		{
@@ -89,9 +101,9 @@ void HashTable::printTable(ostream& out) const
 		}
 		else
 		{
-			out << "Group " << index+1 << endl;
-			out << Table[index].getStart();
-			out << "+" << countBucket(index) -1 << " more similar book(s)" << endl << endl << endl;
+			cout << "Group " << index+1 << endl;
+			cout << Table[index].getStart() << endl;
+			cout << "+" << countBucket(index) -1 << " more similar book(s)" << endl << endl << endl;
 		}
 	}
 }
