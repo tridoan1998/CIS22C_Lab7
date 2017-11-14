@@ -12,8 +12,7 @@
 #include "Book.h"
 #include "List.h"
 using namespace std;
-
-
+/*
 int main()
 {
 	cout << endl <<  "********* Test HashTable constructor and Book constructor ********" << endl;
@@ -37,8 +36,10 @@ int main()
 	cout << ht.countBucket(9) << endl;
 	cout << endl <<  "********* Test search and remove ********" << endl;
 	cout << ht.search(hg) << endl;
+	cout << ht.search(mhc) << endl;
 	ht.remove(hg);
 	cout << ht.search(hg) << endl;
+
 	cout << endl <<  "********* Test printBucket ********" << endl;
 	// test printBucket (also tested the << overload of Book.h)
 	ht.printBucket(cout, 9);
@@ -48,3 +49,4 @@ int main()
 	return 0;
 }
 
+*/
